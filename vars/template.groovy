@@ -3,7 +3,7 @@
  * that should be common for all pipelines)
  */
 def call() {   
-    freeStyleJob('pf-customer-notifications-build-pr-image') {
+    freeStyleJob() {
         description 'Build and push pf-customer-notifications docker image'
     }
 }
