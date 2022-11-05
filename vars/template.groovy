@@ -3,7 +3,6 @@
  * that should be common for all pipelines)
  */
 def createMyStandardDeclarativePipeline() {   
-
     pipeline {
         agent any
         parameters {
