@@ -11,7 +11,6 @@ properties([
             filterLength: 1,
             filterable: true,
             name: 'choice1',
-            referencedParameters: 'ENVIRONMENT',
             script: [$class: 'GroovyScript',
                 fallbackScript: [
                     classpath: [], 
