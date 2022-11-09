@@ -4,7 +4,7 @@
  */
 def call() {   
     pipeline {
-        agent any
+        agent { label 'ap-slave-ecs' }
         parameters {
             string(name: 'myInput', description: 'Some pipeline parameters')
         }
