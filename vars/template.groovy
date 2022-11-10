@@ -33,7 +33,7 @@ def call() {
     pipeline {
         agent { label 'ap-slave-ecs' }
         parameters {
-            string(name: 'myInput', description: 'Some pipeline parameters')
+            string(name: 'myInput', description: 'Some pipeline parameterssssssss')
         }
         stages {
             stage('Stage one') {
