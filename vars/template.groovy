@@ -16,12 +16,7 @@ properties([
                     classpath: [], 
                     sandbox: false, 
                     script: """
-                        if (ENVIRONMENT == 'lab') { 
-                            return['aaa','bbb']
-                        }
-                        else {
                             return['ccc', 'ddd']
-                        }
                     """.stripIndent()
                 ]
             ]
