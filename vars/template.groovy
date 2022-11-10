@@ -12,14 +12,9 @@ properties([
             filterable: true,
             name: 'choice1',
             script: [$class: 'GroovyScript',
-                fallbackScript: [
-                    classpath: [], 
-                    sandbox: true, 
-                    script: 'return ["ERROR"]'
-                ],
                 script: [
                     classpath: [], 
-                    sandbox: true, 
+                    sandbox: false, 
                     script: """
                         if (ENVIRONMENT == 'lab') { 
                             return['aaa','bbb']
