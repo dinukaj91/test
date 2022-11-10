@@ -3,7 +3,12 @@
  * that should be common for all pipelines)
  */
 
-properties([
+
+
+def call() {   
+    pipeline {
+        agent { label 'ap-slave-ecs' }
+        properties([
     parameters([
         [$class: 'CascadeChoiceParameter', 
             choiceType: 'PT_SINGLE_SELECT',
@@ -23,10 +28,6 @@ properties([
         ]
     ])
 ])
-
-def call() {   
-    pipeline {
-        agent { label 'ap-slave-ecs' }
         stages {
             stage('Stage one') {
                 steps {
