@@ -25,7 +25,7 @@ for src_db in src_dst_db_map:
     print("Dumping " + src_db + ".......")
     container = client.containers.run("bchew/dynamodump:latest",
                                       "-m backup --dumpPath /dump "
-                                      f" -r ap-southeast-1 -s {src_db}",
+                                      f" -r ap-southeast-1 -s {src_db} --noConfirm",
                                       volumes={os.path.join(os.getcwd(), "dump"): {'bind': '/dump/', 'mode': 'rw'}},
                                       detach=True)
     container_state(container)
