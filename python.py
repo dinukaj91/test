@@ -30,6 +30,6 @@ for src_db in src_dst_db_map:
     print(src_db, '->', src_dst_db_map[src_db])
     client = docker.from_env()
     print("Dumping " + src_db + ".......")
-    status = dump_restore_dynamodb(client, src_db, backup)
+    status = dump_restore_dynamodb(client, src_db, "backup")
     container_state(status)
 
