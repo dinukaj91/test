@@ -31,6 +31,9 @@ for src_db in src_dst_db_map:
     client = docker.from_env()
     print("Dumping " + src_db + ".......")
     dump_restore_dynamodb(client, src_db, "backup")
+    os.chdir("dump")
+    os.rename(src_db, src_dst_db_map[src_db])
+    os.chdir("..")
     print("Restoring " + src_db + " dump to " + src_dst_db_map[src_db] + ".....")
     dump_restore_dynamodb(client, src_dst_db_map[src_db], "restore")
 
