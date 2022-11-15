@@ -2,9 +2,7 @@ import docker
 import os
 from time import sleep
 
-#src_dst_db_map = {'pf-b2c-insights-staging-ae': 'pf-b2c-insights-prenv-ae', 'pf-b2c-insights-staging-bh': 'pf-b2c-insights-prenv-bh', 'pf-b2c-insights-staging-eg': 'pf-b2c-insights-prenv-eg', 'pf-b2c-insights-staging-qa': 'pf-b2c-insights-prenv-qa', 'pf-b2c-insights-staging-sa': 'pf-b2c-insights-prenv-sa'}
-
-src_dst_db_map = {'pf-b2c-insights-staging-bh': 'pf-b2c-insights-prenv-bh', 'pf-b2c-insights-staging-eg': 'pf-b2c-insights-prenv-eg'}
+src_dst_db_map = {'pf-b2c-insights-staging-ae': 'pf-b2c-insights-prenv-ae', 'pf-b2c-insights-staging-bh': 'pf-b2c-insights-prenv-bh', 'pf-b2c-insights-staging-eg': 'pf-b2c-insights-prenv-eg', 'pf-b2c-insights-staging-qa': 'pf-b2c-insights-prenv-qa', 'pf-b2c-insights-staging-sa': 'pf-b2c-insights-prenv-sa'}
 
 def container_state(container):
     timeout = 1200
