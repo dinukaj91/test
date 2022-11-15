@@ -26,6 +26,7 @@ def my_function(container):
 for i, j in zip(x, y):
     client = docker.from_env()
     shutil.rmtree(os.path.join(os.getcwd(), "dump"), ignore_errors=True)
+    print(os.listdir(os.getcwd()))
     os.mkdir("dump")
     container = client.containers.run("bchew/dynamodump:latest",
                                       "-m backup --dumpPath /dump --accessKey AKIAZCUZQZIUUH2LACEE --secretKey "
@@ -37,4 +38,3 @@ for i, j in zip(x, y):
     os.chdir("dump")
     os.rename(i, j)
     os.chdir("..")
-    print(os.listdir(os.getcwd()))
