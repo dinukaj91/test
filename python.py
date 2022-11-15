@@ -25,7 +25,7 @@ def my_function(container):
 
 for i, j in zip(x, y):
     client = docker.from_env()
-    shutil.rmtree(os.path.join(os.getcwd(), "dump"), ignore_errors=True)
+    shutil.rmtree(os.path.join(os.getcwd(), "dump"), ignore_errors=False)
     print(os.path.join(os.getcwd(), "dump"))
     os.mkdir("dump")
     container = client.containers.run("bchew/dynamodump:latest",
