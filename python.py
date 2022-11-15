@@ -3,8 +3,8 @@ import os
 from time import sleep
 import shutil
 
-x = ["pf-b2c-insights-staging-bh","pf-b2c-insights-staging-eg"]
-y = ["pf-b2c-insights-prenv-bh", "pf-b2c-insights-prenv-eg"]
+x = ["pf-b2c-insights-staging-bh"]
+y = ["pf-b2c-insights-prenv-bh"]
 
 #x = ["pf-b2c-insights-staging-bh", "pf-b2c-insights-staging-eg"]
 #y = ["pf-b2c-insights-prenv-bh", "pf-b2c-insights-staging-eg"]
