@@ -20,7 +20,7 @@ def container_state(container):
 
 
 for src_db in src_dst_db_map:
-    print(key, '->', src_dst_db_map[key])
+    print(src_db, '->', src_dst_db_map[key])
     client = docker.from_env()
     print("Dumping " + src_db + ".......")
     container = client.containers.run("bchew/dynamodump:latest",
