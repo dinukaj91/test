@@ -29,8 +29,8 @@ for i, j in zip(x, y):
     print(os.path.join(os.getcwd(), "dump")
     os.mkdir("dump")
     container = client.containers.run("bchew/dynamodump:latest",
-                                      "-m backup --dumpPath /dump --accessKey AKIAZCUZQZIUUH2LACEE --secretKey "
-                                      f"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 -r ap-southeast-1 -s {i}",
+                                      "-m backup --dumpPath /dump "
+                                      f" -r ap-southeast-1 -s {i}",
                                       volumes={os.path.join(os.getcwd(), "dump"): {'bind': '/dump/', 'mode': 'rw'}},
                                       detach=True)
 
