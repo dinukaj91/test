@@ -18,7 +18,7 @@ def container_state(container):
         continue
 
 
-
+os.mkdir("dump")
 for src_db in src_dst_db_map:
     print(src_db, '->', src_dst_db_map[src_db])
     client = docker.from_env()
