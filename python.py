@@ -25,18 +25,17 @@ def dump_restore_dynamodb(client, db_name, action):
                                   detach=True)
     container_state(container)
     
-def main():
-    os.mkdir("dump")
-    for src_db in src_dst_db_map:
-        print(src_db, '->', src_dst_db_map[src_db])
-        client = docker.from_env()
-        print("Dumping " + src_db + ".......")
-        dump_restore_dynamodb(client, src_db, "backup")
-        os.chdir("dump")
-        os.rename(src_db, src_dst_db_map[src_db])
-        os.chdir("..")
-        print("Restoring " + src_db + " dump to " + src_dst_db_map[src_db] + ".....")
-        dump_restore_dynamodb(client, src_dst_db_map[src_db], "restore")
+os.mkdir("dump")
+for src_db in src_dst_db_map:
+    print(src_db, '->', src_dst_db_map[src_db])
+    client = docker.from_env()
+    print("Dumping " + src_db + ".......")
+    dump_restore_dynamodb(client, src_db, "backup")
+    os.chdir("dump")
+    os.rename(src_db, src_dst_db_map[src_db])
+    os.chdir("..")
+    print("Restoring " + src_db + " dump to " + src_dst_db_map[src_db] + ".....")
+    dump_restore_dynamodb(client, src_dst_db_map[src_db], "restore")
 
 
 
