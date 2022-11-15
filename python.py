@@ -16,26 +16,20 @@ def container_state(container):
         sleep(stop_time)
         elapsed_time += stop_time
         continue
-
+        
+def dump_restore_dynamodb(client, db_name):
+    container = client.containers.run("bchew/dynamodump:latest",
+                                  "-m backup --dumpPath /dump "
+                                  f" -r ap-southeast-1 -s {db_name} --noConfirm",
+                                  volumes={os.path.join(os.getcwd(), "dump"): {'bind': '/dump/', 'mode': 'rw'}},
+                                  detach=True)
+    return container
 
 os.mkdir("dump")
 for src_db in src_dst_db_map:
     print(src_db, '->', src_dst_db_map[src_db])
     client = docker.from_env()
     print("Dumping " + src_db + ".......")
-    container = client.containers.run("bchew/dynamodump:latest",
-                                      "-m backup --dumpPath /dump "
-                                      f" -r ap-southeast-1 -s {src_db} --noConfirm",
-                                      volumes={os.path.join(os.getcwd(), "dump"): {'bind': '/dump/', 'mode': 'rw'}},
-                                      detach=True)
-    container_state(container)
-    os.chdir("dump")
-    os.rename(src_db, src_dst_db_map[src_db])
-    os.chdir("..")
-    print("Restoring " + src_db + " dump to " + src_dst_db_map[src_db] + ".....")
-    container = client.containers.run("bchew/dynamodump:latest",
-                                      "-m restore --dumpPath /dump "
-                                      f"-r ap-southeast-1 -s {src_dst_db_map[src_db]} --noConfirm",
-                                      volumes={os.path.join(os.getcwd(), "dump"): {'bind': '/dump/', 'mode': 'rw'}},
-                                      detach=True)
-    container_state(container)
+    status = dump_restore_dynamodb(client, src_db)
+    container_state(status)
+
