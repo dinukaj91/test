@@ -25,7 +25,7 @@ def my_function(container):
 
 for i, j in zip(x, y):
     client = docker.from_env()
-    print(os.getcwd())
+    print(os.listdir(os.getcwd()))
     shutil.rmtree(os.path.join(os.getcwd(), "dump"), ignore_errors=False)
     print(os.path.join(os.getcwd(), "dump"))
     os.mkdir(os.path.join(os.getcwd(), "dump"))
