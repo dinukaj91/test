@@ -20,6 +20,7 @@ def container_state(container):
 os.mkdir("dump")
 for src_db, dest_db in zip(src_dbs, dest_dbs):
     client = docker.from_env()
+    print("Dumping " + src_db + ".......")
     container = client.containers.run("bchew/dynamodump:latest",
                                       "-m backup --dumpPath /dump "
                                       f" -r ap-southeast-1 -s {src_db}",
@@ -30,6 +31,7 @@ for src_db, dest_db in zip(src_dbs, dest_dbs):
     os.chdir("dump")
     os.rename(src_db, dest_db)
     os.chdir("..")
+    print("Restoring " + src_db + "......")
     container = client.containers.run("bchew/dynamodump:latest",
                                       "-m restore --dumpPath /dump "
                                       f"-r ap-southeast-1 -s {dest_db} --noConfirm",
