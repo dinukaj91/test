@@ -31,7 +31,7 @@ for src_db, dest_db in zip(src_dbs, dest_dbs):
     os.chdir("dump")
     os.rename(src_db, dest_db)
     os.chdir("..")
-    print("Restoring " + src_db + "......")
+    print("Restoring " + src_db + " dump to " + dest_db + ".....")
     container = client.containers.run("bchew/dynamodump:latest",
                                       "-m restore --dumpPath /dump "
                                       f"-r ap-southeast-1 -s {dest_db} --noConfirm",
