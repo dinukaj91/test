@@ -1,10 +1,13 @@
-﻿import docker
+
+
+
+import docker
 import os
 from time import sleep
 import shutil
 
-x = ["pf-b2c-insights-staging-bh", "pf-b2c-insights-staging-eg"]
-y = ["pf-b2c-insights-prenv-bh", "pf-b2c-insights-staging-eg"]
+x = ["pf-b2c-insights-staging-bh","pf-b2c-insights-staging-eg"]
+y = ["pf-b2c-insights-prenv-bh", "pf-b2c-insights-prenv-eg"]
 
 #x = ["pf-b2c-insights-staging-bh", "pf-b2c-insights-staging-eg"]
 #y = ["pf-b2c-insights-prenv-bh", "pf-b2c-insights-staging-eg"]
@@ -29,8 +32,9 @@ for i, j in zip(x, y):
                                       f"Jk6dDtVc1HAFJ9dFV05zUPgKCqMxFnelRcu61ALU -r ap-southeast-1 -s {i}",
                                       volumes={os.path.join(os.getcwd(), "dump"): {'bind': '/dump/', 'mode': 'rw'}},
                                       detach=True)
+
     my_function(container)
-    print("SOMETHING!!!!!")
     os.chdir("dump")
     os.rename(i, j)
     os.chdir("..")
+    os.listdir(os.path.join(os.getcwd(), "dump"))
