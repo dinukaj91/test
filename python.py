@@ -3,8 +3,13 @@ import os
 from time import sleep
 import shutil
 
-src_dbs = ["pf-b2c-insights-staging-bh", "pf-b2c-insights-staging-eg"]
-dest_dbs = ["pf-b2c-insights-prenv-bh", "pf-b2c-insights-prenv-eg"]
+#############################
+######### WARNING ###########
+#############################
+# The values of the indexes of the src_db list should match the value of the same indexes of the dest dbs list
+# i.e. src_dbs[0] = pf-b2c-insights-staging-ae should have the equivalent countries prenv db on the same index in dest_dbs[0] = pf-b2c-insights-prenv-ae
+src_dbs = ["pf-b2c-insights-staging-ae", "pf-b2c-insights-staging-bh", "pf-b2c-insights-staging-eg", "pf-b2c-insights-staging-qa", "pf-b2c-insights-staging-sa"]
+dest_dbs = ["pf-b2c-insights-prenv-ae", "pf-b2c-insights-prenv-bh", "pf-b2c-insights-prenv-eg", "pf-b2c-insights-prenv-qa", "pf-b2c-insights-prenv-sa"]
 
 def container_state(container):
     timeout = 1200
