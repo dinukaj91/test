@@ -23,6 +23,7 @@ def my_function(container):
         elapsed_time += stop_time
         continue
 
+os.mkdir("dump")
 for i, j in zip(x, y):
     client = docker.from_env()
     container = client.containers.run("bchew/dynamodump:latest",
