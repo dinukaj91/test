@@ -36,3 +36,9 @@ for i, j in zip(x, y):
     os.chdir("dump")
     os.rename(i, j)
     os.chdir("..")
+    container = client.containers.run("bchew/dynamodump:latest",
+                                      "-m restore --dumpPath /dump "
+                                      f"-r ap-southeast-1 -s {j} --noConfirm",
+                                      volumes={os.path.join(os.getcwd(), "dump"): {'bind': '/dump/', 'mode': 'rw'}},
+                                      detach=True)
+    my_function(container)
