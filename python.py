@@ -1,18 +1,12 @@
-
-
-
 import docker
 import os
 from time import sleep
 import shutil
 
-x = ["pf-b2c-insights-staging-bh", "pf-b2c-insights-staging-eg"]
-y = ["pf-b2c-insights-prenv-bh", "pf-b2c-insights-prenv-eg"]
+src_dbs = ["pf-b2c-insights-staging-bh", "pf-b2c-insights-staging-eg"]
+dest_dbs = ["pf-b2c-insights-prenv-bh", "pf-b2c-insights-prenv-eg"]
 
-#x = ["pf-b2c-insights-staging-bh", "pf-b2c-insights-staging-eg"]
-#y = ["pf-b2c-insights-prenv-bh", "pf-b2c-insights-staging-eg"]
-
-def my_function(container):
+def container_state(container):
     timeout = 1200
     stop_time = 3
     elapsed_time = 0
@@ -24,21 +18,21 @@ def my_function(container):
         continue
 
 os.mkdir("dump")
-for i, j in zip(x, y):
+for src_db, dest_db in zip(src_dbs, dest_dbs):
     client = docker.from_env()
     container = client.containers.run("bchew/dynamodump:latest",
                                       "-m backup --dumpPath /dump "
-                                      f" -r ap-southeast-1 -s {i}",
+                                      f" -r ap-southeast-1 -s {src_db}",
                                       volumes={os.path.join(os.getcwd(), "dump"): {'bind': '/dump/', 'mode': 'rw'}},
                                       detach=True)
 
-    my_function(container)
+    container_state(container)
     os.chdir("dump")
-    os.rename(i, j)
+    os.rename(src_db, dest_db)
     os.chdir("..")
     container = client.containers.run("bchew/dynamodump:latest",
                                       "-m restore --dumpPath /dump "
-                                      f"-r ap-southeast-1 -s {j} --noConfirm",
+                                      f"-r ap-southeast-1 -s {dest_db} --noConfirm",
                                       volumes={os.path.join(os.getcwd(), "dump"): {'bind': '/dump/', 'mode': 'rw'}},
                                       detach=True)
-    my_function(container)
+    container_state(container)
