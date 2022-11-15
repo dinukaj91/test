@@ -37,4 +37,4 @@ for i, j in zip(x, y):
     os.chdir("dump")
     os.rename(i, j)
     os.chdir("..")
-    os.listdir(os.path.join(os.getcwd(), "dump"))
+    print(os.listdir(os.path.join(os.getcwd(), "dump")))
